@@ -5,20 +5,28 @@
 
     <script>
 
-        var canvas = document.createElement('canvas');
+        var main = document.createElement('div');
 
-        canvas.id = "BodyLayer";
-        canvas.width = 200;
-        canvas.height = 300;
-        canvas.style.zIndex = 8;
-        canvas.style.position = "absolute";
-        canvas.style.border = "1px solid";
+        main.id = "BodyLayer";
+        main.width = 200;
+        main.height = 300;
+        main.style.zIndex = 8;
+        main.style.position = "absolute";
+        main.style.border = "1px solid";
 
 
         var body = document.getElementsByTagName("body")[0];
-        body.appendChild(canvas);
+        body.appendChild(main);
 
-        bodyLayer = document.getElementById("BodyLayer");
+        main = document.getElementById("BodyLayer");
+
+        var canvas = document.createElement('canvas');
+
+        canvas.id = "inputBox";
+        canvas.style.backgroundColor = "red";
+
+        canvas.width = main.offsetWidth;
+        canvas.height = main.offsetHeight;
 
         
         

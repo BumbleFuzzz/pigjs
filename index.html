@@ -1,79 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pig Game</title>
 
-    <style>
-        canvas { background:blue }
-        .wrap, .wrap canvas { width:400px; height:300px }
-        .wrap { position:relative }
-        .wrap > * { position:absolute }
-        #input { top:20px; left:40px; width:150px; height:60px }
-    </style>
-    
-</head>
 <body>
-    <div class = "wrap">
-        <canvas id="canvas" width="200" height="300"></canvas>
-        <textarea id="input" placeholder="Enter your roll (1 to roll, 0 to hold)"></textarea>
-    </div>
 
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const input = document.getElementById('input');
 
-        let score = 0;
-        let currentPlayer = 1;
+        var canvas = document.createElement('canvas');
 
-        function rollDice() {
-            return Math.floor(Math.random() * 6) + 1;
-        }
+        canvas.id = "CursorLayer";
+        canvas.width = 1224;
+        canvas.height = 768;
+        canvas.style.zIndex = 8;
+        canvas.style.position = "absolute";
+        canvas.style.border = "1px solid";
 
-        function drawScore() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.font = '20px Arial';
-            ctx.fillText(`Player ${currentPlayer}: ${score}`, 10, 30);
-        }
 
-        function switchPlayer() {
-            currentPlayer = currentPlayer === 1 ? 2 : 1;
-            score = 0;
-            drawScore();
-        }
+        var body = document.getElementsByTagName("body")[0];
+        body.appendChild(canvas);
 
-        function playGame() {
-            const roll = rollDice();
-            if (roll === 1) {
-                score = 0;
-                switchPlayer();
-            } else {
-                score += roll;
-            }
+        cursorLayer = document.getElementById("CursorLayer");
 
-            drawScore();
-        }
+        console.log(cursorLayer);
 
-        function handleInput() {
-            const inputValue = parseInt(input.value);
-            if (inputValue === 1) {
-                playGame();
-            } else if (inputValue === 0) {
-                switchPlayer();
-            }
-
-            input.value = '';
-        }
-
-        input.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                handleInput();
-            }
-        });
-
-        drawScore();
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
+        ctx.fillRect(100, 100, 200, 200);
+        ctx.fillStyle = "rgba(0, 255, 0, 0.2)";
+        ctx.fillRect(150, 150, 200, 200);
+        ctx.fillStyle = "rgba(0, 0, 255, 0.2)";
+        ctx.fillRect(200, 50, 200, 200);
+        
     </script>
+    
 </body>
 </html>

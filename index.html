@@ -12,7 +12,11 @@
     </div>
     
     <style>
-        canvas #input { top:20px; left:40px; width:150px; height:60px }
+        canvas { background:blue }
+        .wrap, .wrap canvas { width:400px; height:300px }
+        .wrap { position:relative }
+        .wrap > * { position:absolute }
+        #input { top:20px; left:40px; width:150px; height:60px }
     </style>
 
     <script>

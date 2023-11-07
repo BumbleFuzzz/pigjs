@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pig Game</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="50"></canvas>
+    <br>
+    <textarea id="input" placeholder="Enter your roll (1 to roll, 0 to hold)"></textarea>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const input = document.getElementById('input');
+
+        let score = 0;
+        let currentPlayer = 1;
+
+        function rollDice() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+
+        function drawScore() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '20px Arial';
+            ctx.fillText(`Player ${currentPlayer}: ${score}`, 10, 30);
+        }
+
+        function switchPlayer() {
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            score = 0;
+            drawScore();
+        }
+
+        function playGame() {
+            const roll = rollDice();
+            if (roll === 1) {
+                score = 0;
+                switchPlayer();
+            } else {
+                score += roll;
+            }
+
+            drawScore();
+        }
+
+        function handleInput() {
+            const inputValue = parseInt(input.value);
+            if (inputValue === 1) {
+                playGame();
+            } else if (inputValue === 0) {
+                switchPlayer();
+            }
+
+            input.value = '';
+        }
+
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                handleInput();
+            }
+        });
+
+        drawScore();
+    </script>
+</body>
+</html>
